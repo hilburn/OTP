@@ -1,0 +1,36 @@
+# ======================================
+#				COMMAND
+# ======================================
+
+otp.command.notFound=Command not found.
+otp.command.noPermission=You not have permission to use this command.
+otp.command.invalidPlayer=%s is not a valid Player.
+
+otp.command.info.help.start=Available commands are:
+otp.command.help.syntax=/otp help [command]
+otp.command.help.info=For help with all available commands.
+otp.command.clear.syntax=/otp clear [tp|logouts|names]
+otp.command.clear.info=Clears the selected list - default is tp.
+otp.command.list.syntax=/otp list [tp|logouts|names]
+otp.command.list.info=Lists every stored value in selected list - default is tp.
+otp.command.remove.syntax=/otp remove <player>
+otp.command.remove.info=Removes player from all saved lists.
+
+otp.command.tpMe.syntax=/otp <player>
+otp.command.tpMe.info=Teleport command user to other player.
+otp.command.tpToOther.syntax=/otp <player> <otherplayer>
+otp.command.tpToOther.info=Teleports player to other player's location.
+otp.command.tpToLoc.syntax=/otp <player> <x> <y> <z> [dim]
+otp.command.tpToLoc.info=Teleports player to x, y, z coords, dim defaults to sender's dimension.
+otp.command.tpToDim.syntax=/otp <player> <dim>
+otp.command.tpToDim.info=Teleports player to the spawn point of <dim>.
+
+otp.command.list.tp=Saved Teleport List:
+otp.command.list.logouts=Saved Logout List:
+otp.command.list.names=Saved Player List:
+
+otp.command.clear.tp=Teleport list cleared.
+otp.command.clear.logouts=Logout list cleared
+otp.command.clear.names=Player list cleared:
+
+otp.command.removeSuccess=%s removed successfully.
