@@ -11,7 +11,6 @@ import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import otp.commands.OTPCommand;
 import otp.commands.ParentCommand;
 import otp.persist.LoadHandler;
 import otp.reference.Reference;
