@@ -46,12 +46,6 @@ public class ParentCommand extends CommandBase
     }
 
     @Override
-    public boolean canCommandSenderUseCommand(ICommandSender sender)
-    {
-        return true;
-    }
-
-    @Override
     public String getCommandUsage(ICommandSender sender)
     {
         return "/" + getCommandName() + " help";
@@ -110,6 +104,7 @@ public class ParentCommand extends CommandBase
         if (TeleportRegistry.getAllNames().contains(args[0]))
         {
             teleport.handleCommand(sender, args);
+            return;
         }
         throw new CommandNotFoundException("otp.command.notFound");
     }
