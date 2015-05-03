@@ -3,7 +3,7 @@ package otp.commands;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.util.StatCollector;
+import net.minecraft.command.WrongUsageException;
 import otp.persist.TeleportRegistry;
 
 import java.util.ArrayList;
@@ -32,9 +32,9 @@ public class CommandCancel implements ISubCommand
             if (TeleportRegistry.getPendingTP().keySet().contains(player))
                 TeleportRegistry.removeTP(player);
             else
-                throw new CommandException("otp.command.invalidPlayer", player);
+                throw new CommandException(player + " is not a valid player");
         }
-        throw new CommandException("otp.command.syntax.cancel");
+        throw new WrongUsageException(ParentCommand.textMap.get("cancel.syntax"));
     }
 
     @Override

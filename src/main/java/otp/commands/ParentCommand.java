@@ -4,14 +4,10 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.CommandNotFoundException;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.command.server.CommandTeleport;
 import net.minecraft.entity.player.EntityPlayerMP;
 import otp.persist.TeleportRegistry;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class ParentCommand extends CommandBase
@@ -19,6 +15,7 @@ public class ParentCommand extends CommandBase
     public static Map<String, ISubCommand> commands = new LinkedHashMap<String, ISubCommand>();
     public static ParentCommand instance = new ParentCommand();
     public static CommandOTP teleport = new CommandOTP();
+    public static Map<String, String> textMap = new HashMap<String, String>();
 
     static
     {
@@ -27,6 +24,34 @@ public class ParentCommand extends CommandBase
         register(new CommandList());
         register(new CommandCancel());
         register(new CommandRemove());
+
+        textMap.put("info.help.start", "Available commands are:");
+        textMap.put("help.syntax", "/otp help [command]");
+        textMap.put("help.info", "For help with all available commands.");
+        textMap.put("clear.syntax", "/otp clear [tp|logouts|names]");
+        textMap.put("clear.info", "Clears the selected list - default is tp.");
+        textMap.put("list.syntax", "/otp list [tp|logouts|names]");
+        textMap.put("list.info", "Lists every stored value in selected list - default is tp.");
+        textMap.put("remove.syntax", "/otp remove <player>");
+        textMap.put("remove.info", "Removes player from all saved lists.");
+        textMap.put("tpMe.syntax", "/otp <player>");
+        textMap.put("tpMe.info", "Teleport command user to other player.");
+        textMap.put("tpToOther.syntax", "/otp <player> <otherplayer>");
+        textMap.put("tpToOther.info", "Teleports player to other player's location.");
+        textMap.put("tpToLoc.syntax", "/otp <player> <x> <y> <z> [dim]");
+        textMap.put("tpToLoc.info", "Teleports player to x, y, z coords, dim defaults to sender's dimension.");
+        textMap.put("tpToDim.syntax", "/otp <player> <dim>");
+        textMap.put("tpToDim.info", "Teleports player to the spawn point of <dim>.");
+
+        textMap.put("list.tp", "Saved Teleport List:");
+        textMap.put("list.logouts", "Saved Logout List:");
+        textMap.put("list.names", "Saved Player List:");
+
+        textMap.put("clear.tp", "Teleport list cleared.");
+        textMap.put("clear.logouts", "Logout list cleared");
+        textMap.put("clear.names", "Player list cleared:");
+
+        textMap.put("removeSuccess", " removed successfully.");
     }
 
     public static void register(ISubCommand command)
@@ -106,11 +131,8 @@ public class ParentCommand extends CommandBase
             teleport.handleCommand(sender, args);
             return;
         }
-        throw new CommandNotFoundException("otp.command.notFound");
+        throw new CommandNotFoundException("Command not found");
     }
-
-
-
 
 
 }

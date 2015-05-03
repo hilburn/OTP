@@ -4,7 +4,6 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.StatCollector;
 import otp.persist.TeleportRegistry;
 
 import java.util.Arrays;
@@ -44,15 +43,15 @@ public class CommandList implements ISubCommand
             else if (list.equals("players"))
                 list(sender, TeleportRegistry.getAllNames(), list);
             else
-                throw new WrongUsageException("otp.commands.list.syntax");
+                throw new WrongUsageException(ParentCommand.textMap.get("list.syntax"));
             return;
         }
-        throw new WrongUsageException("otp.commands.list.syntax");
+        throw new WrongUsageException(ParentCommand.textMap.get("list.syntax"));
     }
 
     public void list(ICommandSender sender, Collection collection, String loc)
     {
-        sender.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("otp.commands.list."+loc)));
+        sender.addChatMessage(new ChatComponentText(ParentCommand.textMap.get("list." + loc)));
         for (Object o : collection) sender.addChatMessage(new ChatComponentText(o.toString()));
     }
 

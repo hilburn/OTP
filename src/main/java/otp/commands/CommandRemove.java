@@ -4,7 +4,6 @@ import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.StatCollector;
 import otp.persist.TeleportRegistry;
 
 import java.util.List;
@@ -34,12 +33,12 @@ public class CommandRemove implements ISubCommand
                 TeleportRegistry.removeName(player);
                 TeleportRegistry.removeTP(player);
                 TeleportRegistry.removeLogOut(player);
-                sender.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("otp.command.removeSuccess", player)));
+                sender.addChatMessage(new ChatComponentText(player + ParentCommand.textMap.get("removeSuccess")));
                 return;
             }
-            throw new CommandException("otp.command.invalidPlayer", player);
+            throw new CommandException(player + " is not a valid player");
         }
-        throw new WrongUsageException("otp.commands.remove.syntax");
+        throw new WrongUsageException(ParentCommand.textMap.get("remove.syntax"));
     }
 
     @Override

@@ -1,11 +1,9 @@
 package otp.commands;
 
 import net.minecraft.command.CommandBase;
-import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatComponentTranslation;
 import otp.persist.TeleportRegistry;
 
 import java.util.Arrays;
@@ -37,11 +35,11 @@ public class CommandClear implements ISubCommand
             else if (arguments[1].equals("names"))
                 TeleportRegistry.clearNames();
             else
-                throw new WrongUsageException("otp.commands.clear.syntax");
-            sender.addChatMessage(new ChatComponentText("otp.commands.clear."+arguments[1]));
+                throw new WrongUsageException(ParentCommand.textMap.get("clear.syntax"));
+            sender.addChatMessage(new ChatComponentText(ParentCommand.textMap.get("clear." + arguments[1])));
             return;
         }
-        throw new WrongUsageException("otp.commands.clear.syntax");
+        throw new WrongUsageException(ParentCommand.textMap.get("clear.syntax"));
     }
 
     @Override

@@ -3,7 +3,6 @@ package otp.commands;
 import net.minecraft.command.*;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.DimensionManager;
 import otp.Helper;
 import otp.persist.PlayerCoord;
@@ -45,14 +44,13 @@ public class CommandOTP implements ISubCommand
             try
             {
                 target = new PlayerCoord(CommandBase.getPlayer(sender, arguments[0]));
-            }catch (PlayerNotFoundException e)
+            } catch (PlayerNotFoundException e)
             {
                 target = TeleportRegistry.getSavedLogOuts().get(arguments[0]);
                 if (target == null)
-                    throw new CommandException("otp.command.invalidPlayer", arguments[0]);
+                    throw new CommandException(arguments[0] + " is not a valid player");
             }
-        }
-        else
+        } else
         {
             player = arguments[0];
             Integer dim = null;
@@ -71,12 +69,11 @@ public class CommandOTP implements ISubCommand
                     try
                     {
                         target = new PlayerCoord(CommandBase.getPlayer(sender, arguments[1]));
-                    }catch (PlayerNotFoundException e)
+                    } catch (PlayerNotFoundException e)
                     {
                         target = TeleportRegistry.getSavedLogOuts().get(arguments[1]);
                     }
-                }
-                else
+                } else
                 {
                     Set<Integer> dims = new HashSet<Integer>(Arrays.asList(DimensionManager.getIDs()));
                     dim = CommandBase.parseInt(sender, arguments[1]);
@@ -85,14 +82,13 @@ public class CommandOTP implements ISubCommand
                         target = new PlayerCoord(DimensionManager.getProvider(dim).getSpawnPoint(), dim, player);
                     }
                 }
-            }
-            else if (arguments.length == 4 || arguments.length == 5)
+            } else if (arguments.length == 4 || arguments.length == 5)
             {
-                if (dim == null) throw new CommandException("otp.command.tpToLoc.syntax");
-                target = new PlayerCoord(CommandBase.parseDouble(sender, arguments[1]),CommandBase.parseDouble(sender, arguments[2]),CommandBase.parseDouble(sender, arguments[3]), dim, player);
+                if (dim == null) throw new WrongUsageException(ParentCommand.textMap.get("tpToLoc.syntax"));
+                target = new PlayerCoord(CommandBase.parseDouble(sender, arguments[1]), CommandBase.parseDouble(sender, arguments[2]), CommandBase.parseDouble(sender, arguments[3]), dim, player);
             }
         }
-        if (target == null) throw new WrongUsageException("otp.command.help.info");
+        if (target == null) throw new WrongUsageException(ParentCommand.textMap.get("help.info"));
         teleportPlayer(sender, player, target);
     }
 
@@ -102,7 +98,7 @@ public class CommandOTP implements ISubCommand
         {
             EntityPlayerMP playerTarget = CommandBase.getPlayer(sender, player);
             Helper.teleportPlayer(playerTarget, target, playerTarget.mcServer.getConfigurationManager());
-        }catch (PlayerNotFoundException e)
+        } catch (PlayerNotFoundException e)
         {
             TeleportRegistry.saveTP(player, target);
         }
@@ -122,8 +118,8 @@ public class CommandOTP implements ISubCommand
     {
         for (String tag : helpTags)
         {
-            sender.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("otp.command."+tag+".syntax")));
-            sender.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("otp.command."+tag+".info")));
+            sender.addChatMessage(new ChatComponentText(ParentCommand.textMap.get(tag + ".syntax")));
+            sender.addChatMessage(new ChatComponentText(ParentCommand.textMap.get(tag + ".info")));
         }
     }
 }
