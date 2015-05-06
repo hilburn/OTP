@@ -52,6 +52,8 @@ public class ParentCommand extends CommandBase
         textMap.put("clear.names", "Player list cleared:");
 
         textMap.put("removeSuccess", " removed successfully.");
+
+        textMap.put("cancel.syntax", "/otp cancel <player>");
     }
 
     public static void register(ISubCommand command)
