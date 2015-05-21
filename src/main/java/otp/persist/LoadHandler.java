@@ -18,7 +18,7 @@ public class LoadHandler
             PlayerCoord coord = TeleportRegistry.getSavedTP(event.player.getCommandSenderName());
             if (coord != null)
             {
-                Helper.transferPlayerToDimension((EntityPlayerMP)event.player, coord.dim, coord.x + 0.5D, coord.y + 1D, coord.z+0.5D, ((EntityPlayerMP)event.player).mcServer.getConfigurationManager());
+                Helper.transferPlayerToDimension((EntityPlayerMP)event.player, coord.dim, coord.x, coord.y, coord.z, ((EntityPlayerMP)event.player).mcServer.getConfigurationManager());
             }
         }
     }
