@@ -1,5 +1,6 @@
 package otp.persist;
 
+import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -9,7 +10,7 @@ import otp.Helper;
 
 public class LoadHandler
 {
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public void playerLogIn(PlayerEvent.PlayerLoggedInEvent event)
     {
         if (event.player instanceof EntityPlayerMP)
@@ -36,23 +37,10 @@ public class LoadHandler
     @SubscribeEvent
     public void worldLoad(WorldEvent.Load event)
     {
-        WorldSavedData data = event.world.loadItemData(TeleportData.class, TeleportData.KEY);
-        TeleportRegistry.setTPData((TeleportData)data);
-    }
-
-    @SubscribeEvent
-    public void worldSave(WorldEvent.Save event)
-    {
-        TeleportData teleportData = TeleportRegistry.getTPData();
-        if (teleportData != null)
-            event.world.setItemData(TeleportData.KEY, teleportData);
-    }
-
-    @SubscribeEvent
-    public void worldUnload(WorldEvent.Unload event)
-    {
-        TeleportData teleportData = TeleportRegistry.getTPData();
-        if (teleportData != null)
-            event.world.setItemData(TeleportData.KEY, teleportData);
+        if (event.world.provider.dimensionId == 0)
+        {
+            WorldSavedData data = event.world.loadItemData(TeleportData.class, TeleportData.KEY);
+            TeleportRegistry.setTPData((TeleportData)data);
+        }
     }
 }

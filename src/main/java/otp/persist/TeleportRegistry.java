@@ -1,6 +1,5 @@
 package otp.persist;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 
 import java.util.List;
